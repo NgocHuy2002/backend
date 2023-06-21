@@ -4,14 +4,15 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "start": "nodemon ./src/index.js"
   },
   "keywords": [],
   "author": "Huy",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2",
-    "nodemon": "^2.0.22"
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,8 @@
     "url": "https://github.com/NgocHuy2002/Fullstacks/issues"
   },
   "homepage": "https://github.com/NgocHuy2002/Fullstacks#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
 }
