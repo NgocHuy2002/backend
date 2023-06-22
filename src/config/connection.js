@@ -4,26 +4,31 @@ require("dotenv").config();
 const dbState = [
   {
     value: 0,
-    label: "disconnected",
+    label: "Disconnected",
   },
   {
     value: 1,
-    label: "connected",
+    label: "Connected",
   },
   {
     value: 2,
-    label: "connecting",
+    label: "Connecting",
   },
   {
     value: 3,
-    label: "disconnecting",
+    label: "Disconnecting",
   },
 ];
 
 const connection = async () => {
   try {
+    const options = {
+      user: process.env.DB_NAME,
+      pass: process.env.PASS,
+    };
     await mongoose.connect(
-      "mongodb+srv://dnhuy2012:Dnhuy2012%40@cluster0.dqdrz.mongodb.net/"
+      "mongodb+srv://cluster0.dqdrz.mongodb.net/",
+      options
     );
     const state = Number(mongoose.connection.readyState);
     console.log(dbState.find((f) => f.value == state).label, "to db"); // connected to db
