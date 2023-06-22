@@ -1,7 +1,10 @@
 const User = require("../models/user");
 
-const getHomePage = (req, res) => {
-  res.render("app.ejs");
+const getHomePage = async (req, res) => {
+  const result = await User.find({});
+  // console.log(resu)
+  // res.render({ listUser: result });
+  res.json(result);
 };
 const addUser = async (req, res) => {
   let name = req.body.name;
@@ -17,7 +20,19 @@ const addUser = async (req, res) => {
   });
   res.send("add suscced");
 };
+
+const updateUser = async (req, res) => {
+  res.send("update suscced");
+};
+
+const getId = async (req, res) => {
+  // const userId = req.prams._id;
+  // let user = await User.findById(userId).exec();
+  console.log(req.params);
+  res.render("update.ejs");
+};
+
 const getAddPage = (req, res) => {
   res.render("add.ejs");
 };
-module.exports = { getHomePage, getAddPage, addUser };
+module.exports = { getHomePage, getAddPage, addUser, updateUser, getId };
