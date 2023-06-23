@@ -26,10 +26,11 @@ const updateUser = async (req, res) => {
 };
 
 const getId = async (req, res) => {
-  // const userId = req.prams._id;
-  // let user = await User.findById(userId).exec();
-  console.log(req.params);
-  res.render("update.ejs");
+  const userId = req.params.id;
+  let user = await User.findById(userId).exec();
+  // console.log("userId", userId);
+  res.json(user);
+  // res.render("update.ejs");
 };
 
 const getAddPage = (req, res) => {
