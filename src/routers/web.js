@@ -3,18 +3,23 @@ const {
   getHomePage,
   getAddPage,
   addUser,
-  updateUser,
-  getId,
+  postUpdateUser,
+  getUpdateUser,
+  deleteUser,
+  postHandleRemoveUser,
 } = require("../controllers/homeController");
 const router = express.Router();
 
-router.get("/", getHomePage);
+router.get("/:key", getHomePage);
 
 router.get("/add", getAddPage);
-
+//  ADD
 router.post("/addDone", addUser);
-
-router.get("/getId/:id", getId);
-router.put("/update", updateUser);
+// UPDATE
+// router.get("/update/:id", getUpdateUser);
+router.put("/update-user", postUpdateUser);
+// DELETE
+// router.post("/delete-user/:id", deleteUser);
+router.post("/delete-user", postHandleRemoveUser);
 
 module.exports = router;

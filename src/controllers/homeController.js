@@ -1,17 +1,29 @@
 const User = require("../models/user");
+const moment = require("moment");
 
 const getHomePage = async (req, res) => {
-  const result = await User.find({});
-  // console.log(resu)
-  // res.render({ listUser: result });
-  res.json(result);
+  let key = req.params.key;
+  if (key == "") {
+    const result = await User.find({});
+
+    res.json(result);
+  } else {
+    const result = await User.find({
+      $or: [
+        { name: { $regex: key, $options: "i" } },
+        { phoneNumber: { $regex: key, $options: "i" } },
+        { email: { $regex: key, $options: "i" } },
+      ],
+    });
+
+    res.json(result);
+  }
 };
 const addUser = async (req, res) => {
   let name = req.body.name;
   let phoneNumber = req.body.phone;
-  let birth = req.body.birth;
+  let birth = moment(req.body.birth).format("YYYY-MM-DD");
   let email = req.body.email;
-  // console.log(birth);
   await User.create({
     name,
     phoneNumber,
@@ -21,19 +33,50 @@ const addUser = async (req, res) => {
   res.send("add suscced");
 };
 
-const updateUser = async (req, res) => {
-  res.send("update suscced");
+const postUpdateUser = async (req, res) => {
+  let name = req.body.name;
+  let phoneNumber = req.body.phone;
+  let birth = moment(req.body.birth).format("YYYY-MM-DD");
+  let email = req.body.email;
+  let id = req.body.id;
+  await User.updateOne(
+    { _id: id },
+    {
+      name,
+      phoneNumber,
+      birth,
+      email,
+    }
+  );
+
+  res.send("update succeed");
 };
 
-const getId = async (req, res) => {
-  const userId = req.params.id;
-  let user = await User.findById(userId).exec();
-  // console.log("userId", userId);
-  res.json(user);
-  // res.render("update.ejs");
+// const getUpdateUser = async (req, res) => {
+//   const userId = req.params.id;
+//   let user = await User.findById(userId).exec();
+//   res.json(user);
+// };
+
+const deleteUser = (req, res) => {
+  res.render("add.ejs");
+};
+
+const postHandleRemoveUser = async (req, res) => {
+  const userId = req.body._id;
+  await User.deleteOne({ _id: userId });
+  res.send(userId);
 };
 
 const getAddPage = (req, res) => {
   res.render("add.ejs");
 };
-module.exports = { getHomePage, getAddPage, addUser, updateUser, getId };
+module.exports = {
+  getHomePage,
+  getAddPage,
+  addUser,
+  postUpdateUser,
+  // getUpdateUser,
+  deleteUser,
+  postHandleRemoveUser,
+};
