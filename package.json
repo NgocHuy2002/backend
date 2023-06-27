@@ -5,7 +5,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js"
+    "dev": "nodemon -L ./src/index.js"
   },
   "keywords": [],
   "author": "Huy",
@@ -26,8 +26,5 @@
     "url": "https://github.com/NgocHuy2002/Fullstacks/issues"
   },
   "homepage": "https://github.com/NgocHuy2002/Fullstacks#readme",
-  "description": "",
-  "devDependencies": {
-    "nodemon": "^2.0.22"
-  }
+  "description": ""
 }

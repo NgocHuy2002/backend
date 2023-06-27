@@ -11,6 +11,8 @@ const {
 const router = express.Router();
 
 router.get("/:key", getHomePage);
+router.get("/", getHomePage);
+
 
 router.get("/add", getAddPage);
 //  ADD

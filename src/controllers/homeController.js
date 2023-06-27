@@ -3,11 +3,7 @@ const moment = require("moment");
 
 const getHomePage = async (req, res) => {
   let key = req.params.key;
-  if (key == "") {
-    const result = await User.find({});
-
-    res.json(result);
-  } else {
+  if(key){
     const result = await User.find({
       $or: [
         { name: { $regex: key, $options: "i" } },
@@ -15,9 +11,16 @@ const getHomePage = async (req, res) => {
         { email: { $regex: key, $options: "i" } },
       ],
     });
-
     res.json(result);
   }
+  else{
+    const result = await User.find({})
+    res.json(result);
+  }
+
+  // const result = await User.find({});
+
+  // res.send(key)
 };
 const addUser = async (req, res) => {
   let name = req.body.name;
