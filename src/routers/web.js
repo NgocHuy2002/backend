@@ -4,14 +4,12 @@ const {
   getAddPage,
   addUser,
   postUpdateUser,
-  getUpdateUser,
-  deleteUser,
   postHandleRemoveUser,
 } = require("../controllers/homeController");
 const router = express.Router();
 
-router.get("/:key", getHomePage);
-router.get("/", getHomePage);
+router.get("/:key?", getHomePage);
+// router.get("/", getHomePage);
 
 
 router.get("/add", getAddPage);
